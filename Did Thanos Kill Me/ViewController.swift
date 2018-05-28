@@ -7,18 +7,36 @@
 //
 
 import UIKit
+import AACameraView
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var killButton: UIButton!
+    @IBOutlet weak var cameraView: AACameraView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        imageView.image = #imageLiteral(resourceName: "Thanos and His Moon")
+        cameraView.response = { response in
+            
+            // Photo stuff.
+            
+            if let url = response as? URL {
+                
+                // Recorded video URL here
+                
+            } else if let img = response as? UIImage {
+                
+                // Capture image here
+                
+            } else if let error = response as? Error {
+                
+                // Handle error if any!
+                
+            }
+        }
     }
 
     func determineDeath() {
@@ -48,75 +66,84 @@ class ViewController: UIViewController {
     
     //MARK : Splitting the image.
     
-    //
-    
-    func splitImage(row : Int , column : Int){
-        
-        let oImg = imageView.image
-        
-        let height =  (imageView.image?.size.height)! /  CGFloat (row) //height of each image tile
-        let width =  (imageView.image?.size.width)!  / CGFloat (column)  //width of each image tile
-        
-        let scale = (imageView.image?.scale)! //scale conversion factor is needed as UIImage make use of "points" whereas CGImage use pixels.
-        
-        var imageArr = [[UIImage]]() // will contain small pieces of image
-        
-        for y in 0..<row{
-            var yArr = [UIImage]()
-            for x in 0..<column{
-                
-                UIGraphicsBeginImageContextWithOptions(
-                    CGSize(width:width, height:height),
-                    false, 0)
-                let i =  oImg?.cgImage?.cropping(to:  CGRect.init(x: CGFloat(x) * width * scale, y:  CGFloat(y) * height * scale  , width: width * scale  , height: height * scale) )
-                
-                let newImg = UIImage.init(cgImage: i!)
-                
-                yArr.append(newImg)
-                
-                UIGraphicsEndImageContext();
-                
-            }
-            
-            imageArr.append(yArr)
-        }
-        
-    }
-    
-    func createNewImage(imageArr : [[UIImage]]){
-        
-        let row = imageArr.count
-        let column = imageArr[0].count
-        let height =  (imageView.frame.size.height) /  CGFloat (row )
-        let width =  (imageView.frame.size.width) / CGFloat (column )
-        
-        
-        UIGraphicsBeginImageContext(CGSize.init(width: imageView.frame.size.width , height: imageView.frame.size.height))
-        
-        for y in 0..<row{
-            
-            for x in 0..<column{
-                
-                let newImage = imageArr[y][x]
-                
-                newImage.draw(in: CGRect.init(x: CGFloat(x) * width, y:  CGFloat(y) * height  , width: width - 1  , height: height - 1 ))
-                
-            }
-        }
-        
-        let originalImg = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        imageView.image = originalImg
-    }
+//    func splitImage(row : Int , column : Int) {
+//
+//        let oImg = imageView.image
+//
+//        let height =  (imageView.image?.size.height)! /  CGFloat (row) //height of each image tile
+//        let width =  (imageView.image?.size.width)!  / CGFloat (column)  //width of each image tile
+//
+//        let scale = (imageView.image?.scale)! //scale conversion factor is needed as UIImage make use of "points" whereas CGImage use pixels.
+//
+//        var imageArr = [[UIImage]]() // will contain small pieces of image
+//
+//        for y in 0..<row {
+//
+//            var yArr = [UIImage]()
+//
+//            for x in 0..<column{
+//
+//                UIGraphicsBeginImageContextWithOptions(
+//                    CGSize(width:width, height:height),
+//                    false, 0)
+//                let i =  oImg?.cgImage?.cropping(to:  CGRect.init(x: CGFloat(x) * width * scale, y:  CGFloat(y) * height * scale  , width: width * scale  , height: height * scale) )
+//
+//                let newImg = UIImage.init(cgImage: i!)
+//
+//                yArr.append(newImg)
+//
+//                UIGraphicsEndImageContext()
+//
+//            }
+//
+//            imageArr.append(yArr)
+//        }
+//
+//    }
+//
+//    func createNewImage(imageArr : [[UIImage]]) {
+//
+//        let row = imageArr.count
+//        let column = imageArr[0].count
+//        let height =  (imageView.frame.size.height) /  CGFloat (row )
+//        let width =  (imageView.frame.size.width) / CGFloat (column )
+//
+//
+//        UIGraphicsBeginImageContext(CGSize.init(width: imageView.frame.size.width , height: imageView.frame.size.height))
+//
+//        for y in 0..<row{
+//
+//            for x in 0..<column{
+//
+//                let newImage = imageArr[y][x]
+//
+//                newImage.draw(in: CGRect.init(x: CGFloat(x) * width, y:  CGFloat(y) * height  , width: width - 1  , height: height - 1 ))
+//
+//            }
+//        }
+//
+//        let originalImg = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext();
+//        imageView.image = originalImg
+//    }
     
     //MARK : Moving the image.
     
-    func moveRight(view: UIView) {
+//    func moveRight(view: UIView) {
+//
+//        imageView.image.centre.x += 50
+//    }
+    
+    //MARK: Photo malarkey.
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        imageView.image.center.x += 50
+        cameraView.startSession()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        cameraView.stopSession()
+    }
 }
-
-
 
