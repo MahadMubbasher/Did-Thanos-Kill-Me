@@ -18,27 +18,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        cameraView.response = { response in
-            
-            // Photo stuff.
-            
-            if let url = response as? URL {
-                
-                // Recorded video URL here
-                
-            } else if let img = response as? UIImage {
-                
-                // Capture image here
-                
-            } else if let error = response as? Error {
-                
-                // Handle error if any!
-                
-            }
-        }
-    }
 
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        cameraView.startSession()
+    }
+    
     func determineDeath() {
         
         var chanceOfDying = arc4random_uniform(2)
@@ -61,6 +49,28 @@ class ViewController: UIViewController {
         
         determineDeath()
         
+        cameraView.response = { response in
+
+            if let url = response as? URL {
+
+                // Recorded video URL here
+
+            } else if let img = response as? UIImage {
+
+                // Capture image here
+                self.cameraView.captureImage()
+
+            } else if let error = response as? Error {
+
+                // Handle error if any!
+
+            }
+        }
+
+        func viewWillDisappear(_ animated: Bool) {
+
+                cameraView.stopSession()
+            }
         
     }
     
@@ -131,19 +141,10 @@ class ViewController: UIViewController {
     
 //    func moveRight(view: UIView) {
 //
-//        imageView.image.centre.x += 50
+//        cameraView.image.centre.x += 50
 //    }
+//
+//    UIView.animate(withD)
     
-    //MARK: Photo malarkey.
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        cameraView.startSession()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        cameraView.stopSession()
-    }
 }
-
