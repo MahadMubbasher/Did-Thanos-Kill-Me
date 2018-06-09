@@ -18,17 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did Thanos Kill You?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBH-e7-v3G">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Did Thanos Kill You?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBH-e7-v3G">
                                 <rect key="frame" x="0.0" y="426" width="375" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MC7-TS-lxa">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MC7-TS-lxa">
                                 <rect key="frame" x="150" y="492" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Press Here"/>
                                 <connections>
-                                    <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZFE-za-Hdu"/>
+                                    <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n8T-5D-lMW"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yah-cJ-l0P" customClass="AACameraView" customModule="AACameraView">
@@ -38,19 +40,12 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="SBH-e7-v3G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WgB-n8-tEg"/>
-                            <constraint firstItem="MC7-TS-lxa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hfw-HP-TgD"/>
-                            <constraint firstItem="MC7-TS-lxa" firstAttribute="top" secondItem="SBH-e7-v3G" secondAttribute="bottom" constant="50" id="i2a-MD-UbX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MC7-TS-lxa" secondAttribute="bottom" constant="145" id="iQH-9M-IZy"/>
-                            <constraint firstItem="MC7-TS-lxa" firstAttribute="centerX" secondItem="SBH-e7-v3G" secondAttribute="centerX" id="w7a-P3-QQ3"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="cameraView" destination="yah-cJ-l0P" id="xFi-cs-NMp"/>
-                        <outlet property="killButton" destination="MC7-TS-lxa" id="tmz-oO-Mhl"/>
-                        <outlet property="textLabel" destination="SBH-e7-v3G" id="378-Pw-HYg"/>
+                        <outlet property="cameraView" destination="yah-cJ-l0P" id="yza-qH-ttN"/>
+                        <outlet property="killButton" destination="MC7-TS-lxa" id="nI3-6y-OTJ"/>
+                        <outlet property="textLabel" destination="SBH-e7-v3G" id="Vc9-ZT-c4v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

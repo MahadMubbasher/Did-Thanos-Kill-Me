@@ -12,19 +12,18 @@ import AACameraView
 class ViewController: UIViewController {
 
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var killButton: UIButton!
     @IBOutlet weak var cameraView: AACameraView!
-    
+    @IBOutlet weak var killButton: UIButton!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         cameraView.startSession()
+        cameraView.toggleCamera()
     }
     
     func determineDeath() {
@@ -58,6 +57,7 @@ class ViewController: UIViewController {
             } else if let img = response as? UIImage {
 
                 // Capture image here
+                
                 self.cameraView.captureImage()
 
             } else if let error = response as? Error {
@@ -139,12 +139,51 @@ class ViewController: UIViewController {
     
     //MARK : Moving the image.
     
-//    func moveRight(view: UIView) {
-//
-//        cameraView.image.centre.x += 50
-//    }
-//
-//    UIView.animate(withD)
+    //    UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
     
-    
+//    self.moveRight(view: self.black3)
+//
+//  }) { (_) in
+//
+//    self.moveLeft(view: self.black3)
+//}
+//
+//UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: {
+//
+//    self.moveRight(view: self.red)
+//
+//}) { (_) in
+//
+//    self.moveLeft(view: self.red)
+//}
+//
+//UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
+//
+//    self.moveRight(view: self.blue)
+//
+//}) { (_) in
+//
+//    self.moveLeft(view: self.blue)
+//}
+//
+//UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
+//
+//    self.moveRight(view: self.green)
+//
+//}) { (_) in
+//
+//    self.moveLeft(view: self.green)
+//}
+//
+//UIView.animate(withDuration: duration, delay: 0, options: .autoreverse, animations: {
+//
+//    self.moveRight(view: self.orange)
+//
+//}) { (_) in
+//
+//    //            self.moveLeft(view: self.orange)
+//}
+//
+//
+//}
 }
